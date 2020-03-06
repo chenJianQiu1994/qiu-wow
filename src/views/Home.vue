@@ -1,7 +1,11 @@
 <template>
   <div class="ata-box container">
     <div class="title hint">Activate the animation</div>
-    <div class="title abbreviation animated bounceInLeft">ata.js</div>
+
+    <div class="title abbreviation animated bounceInLeft">
+        <a href="https://nodei.co/npm/qiu-wow/"><img src="https://nodei.co/npm/qiu-wow.png"></a>
+    </div>
+
     <div class="block-box">
       <div
           class="block-dom wow"
@@ -76,6 +80,9 @@ export default {
     .abbreviation {
       font-size: 100px;
       font-weight: bolder;
+        img {
+            margin: 0 auto;
+        }
     }
 
     .block-box {
