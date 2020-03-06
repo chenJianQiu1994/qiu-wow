@@ -2,6 +2,8 @@
 
 [![NPM](https://nodei.co/npm/qiu-wow.png)](https://nodei.co/npm/qiu-wow/)
 
+预览地址：https://chenjianqiu1994.github.io/qiu-wow/dist/#/
+
 1. npm 引入
 ```
 npm i qiu-wow
