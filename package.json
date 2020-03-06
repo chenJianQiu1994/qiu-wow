@@ -1,8 +1,12 @@
 {
   "name": "qiu-wow",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "基于 animation.css 的滚动显示动画。 Scroll animation display based on animation.css.",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chenJianQiu1994/qiu-wow.git"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
