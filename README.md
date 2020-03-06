@@ -1,5 +1,5 @@
 作用：当动画模块滚动到浏览器视口时激活动画。这个插件是基于 vue 与 animate.css 的也可以定义自己的动画效果。
-[![NPM](https://nodei.co/npm/<qiu-wow>.png)](https://nodei.co/npm/<qiu-wow>/)
+[![NPM](https://nodei.co/npm/<package>.png)](https://nodei.co/npm/<package>/)
 
 1. npm 引入
 ```
