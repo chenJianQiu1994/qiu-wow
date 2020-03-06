@@ -61,6 +61,8 @@ export default {
 
 <style scoped lang="less">
   .ata-box {
+    width: 1200px;
+    margin: 0 auto;
     .title {
       text-align: center;
     }
@@ -77,21 +79,20 @@ export default {
     }
 
     .block-box {
-      /*display: flex;*/
-      /*flex-wrap: wrap;*/
+      display: flex;
+      flex-wrap: wrap;
       .block {
-        width: 90px;
-        height: 90px;
+        width: 245px;
+        height: 250px;
         overflow: hidden;
-        /*margin: 35px 25px 10px 25px;*/
+        margin: 35px 25px 10px 25px;
 
         display: flex;
         justify-content: center;
         align-items: center;
         border: 1px solid #c1c1c1;
         .animate {
-          width: 35px;
-          /*width: 100px;*/
+          width: 100px;
           animation-duration: 3s;
           animation-delay: 1s;
         }
