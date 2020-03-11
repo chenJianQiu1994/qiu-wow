@@ -1,6 +1,6 @@
 {
   "name": "qiu-wow",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "基于 animation.css 的滚动显示动画。 Scroll animation display based on animation.css.",
   "main": "index.js",
   "repository": {

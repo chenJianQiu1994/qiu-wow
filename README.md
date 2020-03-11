@@ -2,11 +2,11 @@
 
 [![NPM](https://nodei.co/npm/qiu-wow.png)](https://nodei.co/npm/qiu-wow/)
 
-官网地址：https://chenjianqiu1994.github.io/qiu-wow/dist/#/animationPage
+官网地址：[https://chenjianqiu1994.github.io/qiu-wow/dist/#/animationPage](https://chenjianqiu1994.github.io/qiu-wow/dist/#/animationPage)
 
-文档地址：https://chenjianqiu1994.github.io/qiu-wow/dist/#/helpDocument
+文档地址：[https://chenjianqiu1994.github.io/qiu-wow/dist/#/helpDocument](https://chenjianqiu1994.github.io/qiu-wow/dist/#/helpDocument)
 
-GitHub地址： https://github.com/chenJianQiu1994/qiu-wow (欢迎 star)
+GitHub地址： [https://github.com/chenJianQiu1994/qiu-wow](https://github.com/chenJianQiu1994/qiu-wow) (欢迎 star)
 
 快速开始：
 
