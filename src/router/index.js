@@ -1,14 +1,24 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home";
+import animationPage from "../views/animationPage";
+import helpDocument from "../views/helpDocument";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    redirect: "/animationPage"
+  },
+  {
+    path: "/animationPage",
+    name: "animationPage",
+    component: animationPage
+  },
+  {
+    path: "/helpDocument",
+    name: "helpDocument",
+    component: helpDocument
   }
 ];
 

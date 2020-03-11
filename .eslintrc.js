@@ -113,7 +113,7 @@ module.exports = {
       'args': 'after-used'
     }], //不允许有声明后未使用的变量或者参数
     'no-use-before-define': [2, 'nofunc'], //不允许在未定义之前就使用变量
-    'indent': ['error', 2], //强制一致的缩进风格
+    // 'indent': [2 , 2], //强制一致的缩进风格
     'brace-style': [2, '1tbs', { 'allowSingleLine': false }], //大括号风格
     'camelcase': [2, { 'properties': 'never' }], //强制驼峰命名规则
     'comma-style': [2, 'last'], //逗号风格
@@ -148,7 +148,7 @@ module.exports = {
     'operator-assignment': 0, //赋值运算符的风格
     'padded-blocks': [2, 'never'], //块内行首行尾是否空行
     'quote-props': 0, //对象字面量中属性名加引号
-    'quotes': [1, 'single', 'avoid-escape'], //引号风格
+    // 'quotes': [1, 'single', 'avoid-escape'], //引号风格
     'semi': [2, 'always'], //强制语句分号结尾
     'semi-spacing': [2, {
       'before': false,

@@ -2,19 +2,25 @@
 
 [![NPM](https://nodei.co/npm/qiu-wow.png)](https://nodei.co/npm/qiu-wow/)
 
-预览地址：https://chenjianqiu1994.github.io/qiu-wow/dist/#/
+官网地址：https://chenjianqiu1994.github.io/qiu-wow/dist/#/animationPage
 
-1. npm 引入
+文档地址：https://chenjianqiu1994.github.io/qiu-wow/dist/#/helpDocument
+
+GitHub地址： https://github.com/chenJianQiu1994/qiu-wow (欢迎 star)
+
+快速开始：
+
+一. npm 引入
 ```
 npm i qiu-wow
 ```
-2. import 页面引入
+二. import 页面引入
 
 ```
 import wow from 'qiu-wow';
 ```
 
-3. 写 html 并在 class 中加一个自己定义的 boxClass
+三. 写 html 并在 class 中加一个自己定义的 boxClass
 
 ```
 // wow 为自己定的 boxClass
@@ -24,7 +30,7 @@ import wow from 'qiu-wow';
 </div>
 ```
 
-4. 填写配置信息调用, 启动项目并打开页面即可看到效果
+四. 填写配置信息调用, 启动项目并打开页面即可看到效果
 
 ```
 wow({
