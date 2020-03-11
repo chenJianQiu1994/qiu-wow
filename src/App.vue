@@ -7,7 +7,7 @@
       </div>
 
       <div class="github">
-        GitHub: <a>https://github.com/chenJianQiu1994/qiu-wow</a> (欢迎 star)
+        GitHub: <a href="https://github.com/chenJianQiu1994/qiu-wow">https://github.com/chenJianQiu1994/qiu-wow</a> (欢迎 star)
       </div>
     </div>
 
@@ -65,6 +65,7 @@
 
     a {
       cursor: pointer;
+      text-decoration: none;
     }
   }
 </style>
