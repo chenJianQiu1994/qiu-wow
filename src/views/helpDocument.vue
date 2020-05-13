@@ -12,7 +12,7 @@
 
             <div class="code-box">
                 <pre>
-                npm install animate.css --save
+                npm install animate.css@3.7.2
 
                 // main.js
                 import "animate.css";
