@@ -27,7 +27,7 @@
 </template>
 
 <script>
-  import wow from '../../index';
+  import { qiuWowJS } from '../../index';
   export default {
     name: 'animationPage',
     components: {},
@@ -54,19 +54,14 @@
     },
 // 挂载
     mounted() {
-      wow({
-        boxClass: 'wow', // 要滚动显示动画的 class
-        animateClass: 'animated', // 触发 CSS 动画的 class
-        offset: 0, // 浏览器视口底部的附加距离。当用户滚动并到达此距离时才会显示动画。
-        innerHeight: 0, // 定义浏览器视口的高度（当手机页面进行缩放时使用）
-        mobile: false, // 在手机端是否禁用  默认不禁用
-        live: true, // 在页面上同时检查新的 wow 元素
-        isCycle: false, // 是否来回滚动都执行动画。当超出浏览器视口的动画模块 再 回到浏览器视口时是否重新激活动画
-        callback: null
-      });
+      this.start();
     },
 // 事件处理器
-    methods: {}
+    methods: {
+      start() {
+        qiuWowJS();
+      }
+    }
   };
 </script>
 

@@ -15,6 +15,7 @@
   "dependencies": {
     "animate.css": "^3.7.2",
     "core-js": "^3.4.3",
+    "element-ui": "^2.13.1",
     "sass": "^1.23.7",
     "sass-loader": "^8.0.0",
     "vue": "^2.6.10",

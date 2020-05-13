@@ -1,144 +1,27 @@
 /* eslint-disable */
 /**
- * 信息存放
- * @type {{element: HTMLElement, scrolled: boolean, animationNameCache: WeakMap<object, any>, vendors: string[], interval: string, boxes: undefined, defaultInfo: {boxClass: string, animateClass: string, offset: number, mobile: boolean, live: boolean, callback: null}}}
- */
-const wow = {
-  element: window.document.documentElement, // HTML 文档根节点元素
-  scrolled: true, // 滚动状态
-  animationNameCache: new WeakMap(),
-  vendors: ['moz', 'webkit'], // 样式前缀
-  interval: '',
-
-  boxes: undefined,
-
-  /**
-   * 默认参数信息
-   */
-  defaultInfo: {
-    boxClass: 'wow', // 要滚动显示动画的 class
-    animateClass: 'animated', // 触发 CSS 动画的 class
-    offset: 0, // 浏览器视口底部的附加距离。当用户滚动并到达此距离时才会显示动画。
-    innerHeight: 0, // 定义浏览器视口的高度（当手机页面进行缩放时使用）
-    mobile: false, // 在手机端是否禁用  默认不禁用
-    live: true, // 在页面上同时检查新的 wow 元素
-    isCycle: false, // 是否来回滚动都执行动画。当超出浏览器视口的动画模块 再 回到浏览器视口时是否重新激活动画
-    callback: null // 激活动画显示 时的回调
-  }
-};
-
-/**
- * 滚动回调
- * @returns {*|*|void}
- */
-function scrollCallback() {
-  wow.scrolled = false;
-  let ref = wow.defaultInfo.isCycle ? util.boxList() : (wow.boxes || util.boxList());
-  let results = [];
-
-  ref.forEach(item => {
-    if (!item) {
-      return true;
-    }
-
-    if (util.isVisible(item)) {
-      util.show(item);
-      return true;
-    }
-
-    if (wow.defaultInfo.isCycle && !util.isVisible(item) && item.eventList && item.eventList.animationend) {
-      util.applyStyle(item, true);
-      item.eventList = {};
-    }
-
-    results.push(item);
-  });
-
-  wow.boxes = results;
-
-  if (!(results.length || wow.defaultInfo.live)) {
-    return util.stop();
-  }
-}
-
-/**
- * 初始化
- * @returns {Array}
- */
-function init(config) {
-  let ref;
-
-  wow.defaultInfo = Object.assign(wow.defaultInfo, config);
-
-  // 属性返回当前文档的状态
-  // uninitialized - 还未开始载入
-  // loading - 载入中
-  // interactive - 已加载，文档与用户可以开始交互
-  // complete - 载入完成
-  let interval = setInterval(() => {
-    if ((ref = document.readyState) === 'interactive' || ref === 'complete') {
-      clearInterval(interval);
-      // 开始函数
-      start();
-    }
-  }, 50);
-}
-
-/**
- * 开始
- */
-function start() {
-  if (util.boxList().length) {
-    if (util.disabled()) {
-      util.resetStyle();
-    } else {
-      // 设置初始样式
-      util.boxList().forEach(item => {
-        util.applyStyle(item, true);
-      });
-
-      scrollCallback();
-
-      // 在document视图或者一个element在滚动的时候，会触发元素的scroll事件
-      util.addEvent(window, 'scroll', scrollCallback);
-
-      // 当调整浏览器窗口大小时会触发此事件
-      util.addEvent(window, 'resize', scrollCallback);
-    }
-  }
-
-
-  // 在页面上同时检查新的 wow 元素
-  if (wow.defaultInfo.live) {
-    return new MutationObserver(records => {
-      let results = [];
-
-      if (records.length) {
-        records.forEach(item => {
-          results.push(
-            (() => {
-              let ref = item.addedNodes || [];
-              let results1 = [];
-              ref.forEach(dom => {
-                results1.push(util.doSync(dom));
-              });
-              return results1;
-            })()
-          );
-        });
-      }
-      return results;
-    }).observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-  }
-}
-
-/**
  * 工具
  */
 let util = {
+  /**
+   * 获取 box 中的动画名称
+   * @param box
+   * @returns {*}
+   */
+  animationName: function (box) {
+    let animationName = getComputedStyle(box).getPropertyValue('animation-name');
+
+    if (animationName === 'none') {
+      return '';
+    } else {
+      return animationName;
+    }
+  },
+
+
+
+
+
   /**
    * 判断是不是手机
    * @returns {boolean}
@@ -149,19 +32,20 @@ let util = {
     );
   },
 
-  /**
-   * 对象合并
-   * @returns {*}
-   */
-  extend: (...argument) => {
-    return Object.assign(...argument);
-  },
+  // /**
+  //  * 对象合并
+  //  * @returns {*}
+  //  */
+  // extend: (...argument) => {
+  //   return Object.assign(...argument);
+  // },
 
   /**
    * 获取所有 定义了boxClass 的显示隐藏框
    */
   boxList: () => {
-    return [...wow.element.querySelectorAll('.' + wow.defaultInfo.boxClass)];
+    const self = this;
+    return [...self.element.querySelectorAll('.' + self.defaultInfo.boxClass)];
   },
 
   /**
@@ -186,12 +70,13 @@ let util = {
    * @returns {boolean|*}
    */
   disabled: () => {
-    return wow.defaultInfo.mobile;
+    const self = this;
+    return self.defaultInfo.mobile;
     // && util.isMobile();
   },
 
   /**
-   * 重置样式 将 box 设为显示
+   * 重置样式 将 隐藏box 设为显示
    * @returns {Array}
    */
   resetStyle: () => {
@@ -233,8 +118,9 @@ let util = {
    * @returns {*}
    */
   customStyle: function (box, hidden, duration, delay, iteration) {
+    const self = this;
     if (hidden) {
-      wow.animationNameCache.set(box, util.animationName(box));
+      self.animationNameCache.set(box, util.animationName(box));
     }
 
     box.style.visibility = hidden ? 'hidden' : 'visible';
@@ -258,26 +144,12 @@ let util = {
     }
 
     util.vendorSet(box.style, {
-      animationName: hidden ? 'none' : wow.animationNameCache.get(box)
+      animationName: hidden ? 'none' : self.animationNameCache.get(box)
     });
 
     return box;
   },
 
-  /**
-   * 获取 box 中的动画名称
-   * @param box
-   * @returns {*}
-   */
-  animationName: function (box) {
-    let animationName = getComputedStyle(box).getPropertyValue('animation-name');
-
-    if (animationName === 'none') {
-      return '';
-    } else {
-      return animationName;
-    }
-  },
 
   /**
    * 给样式加前缀并赋值
@@ -285,27 +157,41 @@ let util = {
    * @param properties
    * @returns {Array}
    */
+  // vendorSet: function (elem, properties) {
+  //   const self = this;
+  //   let results = [];
+  //   debugger
+  //   for (let name in properties) {
+  //     let value = properties[name];
+  //     elem['' + name] = value;
+  //
+  //     results.push(
+  //       (() => {
+  //         let results1 = [];
+  //
+  //         self.vendors.forEach(vendor => {
+  //           results1.push(
+  //             (elem['' + vendor + name.charAt(0).toUpperCase() + name.substr(1)] = value)
+  //           );
+  //         });
+  //
+  //         return results1;
+  //       })()
+  //     );
+  //   }
+  //   return results;
+  // },
   vendorSet: function (elem, properties) {
-    let results = [];
+    const self = this;
     for (let name in properties) {
       let value = properties[name];
+
       elem['' + name] = value;
 
-      results.push(
-        (() => {
-          let results1 = [];
-
-          wow.vendors.forEach(vendor => {
-            results1.push(
-              (elem['' + vendor + name.charAt(0).toUpperCase() + name.substr(1)] = value)
-            );
-          });
-
-          return results1;
-        })()
-      );
+      self.vendors.forEach(vendor => {
+          elem['' + vendor + name.charAt(0).toUpperCase() + name.substr(1)] = value
+      });
     }
-    return results;
   },
 
   /**
@@ -314,8 +200,9 @@ let util = {
    * @returns {boolean}
    */
   isVisible: function (box) {
+    const self = this;
     // 在浏览器视口窗 顶部与底部 另加的距离
-    let offset = wow.defaultInfo.offset;
+    let offset = self.defaultInfo.offset;
 
     // 浏览器顶部位置
     let viewTop = window.pageYOffset;
@@ -339,16 +226,16 @@ let util = {
    * @returns {*}
    */
   show: function (box) {
-
+    const self = this;
     // 将 visibility 隐藏 改为 显示
     util.applyStyle(box);
 
     // 向 box 的 class 中添加 动画类名
-    box.className = box.className + ' ' + wow.defaultInfo.animateClass;
+    box.className = box.className + ' ' + self.defaultInfo.animateClass;
 
     // 判断有没有设置 回调
-    if (wow.defaultInfo.callback != null) {
-      wow.defaultInfo.callback(box);
+    if (self.defaultInfo.callback != null) {
+      self.defaultInfo.callback(box);
     }
 
     if (box.eventList === undefined) {
@@ -385,11 +272,13 @@ let util = {
    * @returns {*}
    */
   resetAnimation: function (event) {
+    debugger
+    const self = this;
     let target;
 
     if (event.type.toLowerCase().indexOf('animationend') >= 0) {
       target = event.target || event.srcElement;
-      return (target.className = target.className.replace(wow.defaultInfo.animateClass, '').trim());
+      return (target.className = target.className.replace(self.defaultInfo.animateClass, '').trim());
     }
   },
 
@@ -400,7 +289,8 @@ let util = {
    * @returns {*}
    */
   resetAnimationCycle: function (box) {
-    return (box.className = box.className.replace(wow.defaultInfo.animateClass, '').trim());
+    const self = this;
+    return (box.className = box.className.replace(self.defaultInfo.animateClass, '').trim());
   },
 
   /**
@@ -462,8 +352,9 @@ let util = {
    * @returns {number}
    */
   innerHeight: function () {
-    if (wow.defaultInfo.innerHeight) {
-      return wow.defaultInfo.innerHeight;
+    const self = this;
+    if (self.defaultInfo.innerHeight) {
+      return self.defaultInfo.innerHeight;
     } else {
       if (util.isMobile()) {
         // 判断 html元素对象内容的实际高度 > 浏览器窗口文档显示区域的高度
@@ -480,9 +371,10 @@ let util = {
   },
 
   doSync: element => {
+    const self = this;
     let results = [];
     if (element == null) {
-      element = wow.element;
+      element = self.element;
     }
 
     if (element.nodeType !== 1) {
@@ -490,8 +382,8 @@ let util = {
     }
 
     util.boxList().forEach(box => {
-      if (wow.boxes.indexOf(box) < 0) {
-        wow.boxes.push(box);
+      if (self.boxes.indexOf(box) < 0) {
+        self.boxes.push(box);
 
         if (util.disabled()) {
           util.resetStyle();
@@ -499,7 +391,7 @@ let util = {
           util.applyStyle(box, true);
         }
 
-        results.push((wow.scrolled = true));
+        results.push((self.scrolled = true));
       } else {
         results.push(void 0);
       }
@@ -508,4 +400,4 @@ let util = {
   }
 };
 
-export default init;
+export default util;

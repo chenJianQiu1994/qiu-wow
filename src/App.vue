@@ -7,7 +7,7 @@
       </div>
 
       <div class="github">
-        GitHub: <a href="https://github.com/chenJianQiu1994/qiu-wow">https://github.com/chenJianQiu1994/qiu-wow</a> (欢迎 star)
+        GitHub: <a href="https://github.com/chenJianQiu1994/qiu-wow">https://github.com/chenJianQiu1994/qiu-wow</a>
       </div>
     </div>
 
